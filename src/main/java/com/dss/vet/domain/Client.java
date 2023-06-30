@@ -50,7 +50,8 @@ public class Client implements Serializable{
 		this.id = objDto.getId();
 		this.cpf = objDto.getCpf();
 		this.name = objDto.getName();
-		this.lastName = objDto.getLastName();		
+		this.lastName = objDto.getLastName();
+		this.status = objDto.getStatus();			
 	}
 
 	public Integer getId() {

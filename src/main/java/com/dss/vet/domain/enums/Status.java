@@ -2,10 +2,10 @@ package com.dss.vet.domain.enums;
 
 public enum Status {
 	
-	ATIVO(1), 
-	CONGELADO(2),
-	SUSPENSO(3),	
-    CANCELADO(4);
+	ATIVO(0), 
+	CONGELADO(1),
+	SUSPENSO(2),	
+    CANCELADO(3);
 	
 	private Integer cod;
 	
@@ -13,12 +13,11 @@ public enum Status {
 		this.cod = cod;
 	}
 	
-
 	public Integer getCod() {
 		return cod;
 	}
 
-	
+	//metodo para pegar o valor do enum pelo codigo
 	public static Status toEnum(Integer cod) {
 		if(cod == null) {
 			return null;			
