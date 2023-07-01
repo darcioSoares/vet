@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,27 @@ public class ClientService {
 	
 	public Client create(ClientDto objDto) {
 		
-		objDto.setStatus(Status.CANCELADO);
+		this.validationCpf(objDto);		
+		//ao criar o cliente, ele já entra como ativo
+		objDto.setStatus(Status.ATIVO);
 		
 		Client objClient = new Client(objDto);
 		return repository.save(objClient);
+	}
+	
+	public Client update(Integer id, ClientDto objDto) {
+		
+		Optional<Client> oldClient = repository.findById(id);
+		if(oldClient.isEmpty()) {
+			throw new DataIntegrityViolationException("Cliente não encontrado, update falhou!");
+		}
+		
+		this.validationCpf(objDto);
+		objDto.setId(id);
+		Client client = new Client(objDto);
+		Client result = repository.save(client);
+		
+		return result;		
 	}
 
 	public List<Client> findAll() {
@@ -36,15 +54,18 @@ public class ClientService {
 	public Client findById(Integer id) {
 		Optional<Client> result = repository.findById(id);
 		return result.orElse(null);
-	}
+	}	
+	
+	private void validationCpf(ClientDto objDto) {
+		Optional<Client> resultCpf = repository.findByCpf(objDto.getCpf());
+		
+		//caso o cpf exista, verificar se e o mesmo id, para poder permitir o update
+		if(resultCpf.isPresent() && resultCpf.get().getId() != objDto.getId()) {			
+			throw new DataIntegrityViolationException("CPF já cadastrado");
+		}
+		
+	};
+	
 
-	public Client update(Integer id, ClientDto objDto) {
-		objDto.setId(id);
-		Client client = new Client(objDto);
-		Client result = repository.save(client);
-		
-		return result;
-		
-	}
 
 }
