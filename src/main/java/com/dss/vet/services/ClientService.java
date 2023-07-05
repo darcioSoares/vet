@@ -3,12 +3,8 @@ package com.dss.vet.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.dss.vet.domain.Client;
