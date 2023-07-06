@@ -52,6 +52,14 @@ public class ClientController {
 		return ResponseEntity.ok().body(new ClientDto(client));
 		
 	}
+//	@PostMapping
+//	public void create(@Valid @RequestBody ClientDto objDto){
+//		
+//		clientService.teste(objDto);
+//		System.out.println(objDto.getName());
+//		System.out.println(objDto.getAddress().getNumber());	
+//		
+//	}
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ClientDto> update(@PathVariable Integer id, @Valid @RequestBody ClientDto objDto){

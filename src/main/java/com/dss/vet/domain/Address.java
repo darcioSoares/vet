@@ -3,10 +3,16 @@ package com.dss.vet.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.dss.vet.dtos.AddressDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Address implements Serializable{
@@ -14,18 +20,48 @@ public class Address implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column(name = "address_id")
 	private Integer id;
 	private String road;
 	private String number; 
 	private String zipCode;
 	private String state;
 	private String contactPhone;
-		
+	
+	@JsonIgnore
+	@OneToOne()
+	@JoinColumn(name = "client_id")
+	private Client client;
+	
 	public Address() {
 		super();
+	}	
+		
+	
+	public Address(AddressDto objDto) {
+		super();
+		this.id = objDto.getId();
+		this.road = objDto.getRoad();
+		this.number = objDto.getNumber();
+		this.zipCode = objDto.getZipCode();
+		this.state = objDto.getState();
+		this.contactPhone = objDto.getContactPhone();
+		
 	}
 	
-	
+	public Address(Integer id, Address objDto) {
+		super();
+		this.id = objDto.getId();
+		this.road = objDto.getRoad();
+		this.number = objDto.getNumber();
+		this.zipCode = objDto.getZipCode();
+		this.state = objDto.getState();
+		this.contactPhone = objDto.getContactPhone();
+		
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -64,6 +100,16 @@ public class Address implements Serializable{
 	}
 	
 	
+	public Client getClient() {
+		return client;
+	}
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

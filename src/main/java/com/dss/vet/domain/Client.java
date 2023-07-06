@@ -9,10 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.dss.vet.domain.enums.Status;
 import com.dss.vet.dtos.ClientDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Client implements Serializable{
@@ -28,6 +30,10 @@ public class Client implements Serializable{
 	private String name;
 	private String lastName;
 	private Status status;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "client")
+	private Address address;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate created_at = LocalDate.now();
@@ -53,6 +59,7 @@ public class Client implements Serializable{
 		this.lastName = objDto.getLastName();
 		this.status = objDto.getStatus();			
 	}
+	
 
 	public Integer getId() {
 		return id;
@@ -88,9 +95,20 @@ public class Client implements Serializable{
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}	
+	
+	public Address getAddress() {
+		return address;
 	}
 
-	
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
