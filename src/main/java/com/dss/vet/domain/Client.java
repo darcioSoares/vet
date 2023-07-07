@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 import com.dss.vet.domain.enums.Status;
 import com.dss.vet.dtos.ClientDto;
@@ -31,6 +32,7 @@ public class Client implements Serializable{
 	private String lastName;
 	private Status status;
 	
+	@Valid
 	@JsonIgnore
 	@OneToOne(mappedBy = "client")
 	private Address address;

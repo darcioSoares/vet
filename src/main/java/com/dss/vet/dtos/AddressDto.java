@@ -1,21 +1,14 @@
 package com.dss.vet.dtos;
 
-import javax.validation.constraints.NotNull;
-
 import com.dss.vet.domain.Address;
 
 public class AddressDto {	
 	
 	private Integer id;
-	@NotNull(message = "Campo RUa Preenchimento Obrigatorio")
 	private String road;
-	@NotNull(message = "Campo Numero Preenchimento Obrigatorio")
 	private String number; 
-	@NotNull(message = "Campo CEP Preenchimento Obrigatorio")
 	private String zipCode;
-	@NotNull(message = "Campo Estado Preenchimento Obrigatorio")
 	private String state;
-	@NotNull(message = "Campo Telefone de contato Preenchimento Obrigatorio")
 	private String contactPhone;	
 	
 		
@@ -33,6 +26,7 @@ public class AddressDto {
 		this.contactPhone = ObjAddress.getContactPhone();		
 	}
 
+	
 	public Integer getId() {
 		return id;
 	}

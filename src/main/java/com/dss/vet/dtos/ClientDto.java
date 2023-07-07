@@ -1,5 +1,6 @@
 package com.dss.vet.dtos;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.dss.vet.domain.Address;
@@ -9,14 +10,14 @@ import com.dss.vet.domain.enums.Status;
 public class ClientDto {
 	
 	private Integer id;
-	@NotNull(message = "Campo CPF Preenchimento Obrigatorio")
+	@NotBlank(message = "Campo CPF Preenchimento Obrigatorio")
 	private String cpf;
-	@NotNull(message = "Campo Name Preenchimento Obrigatorio")	
+	@NotBlank(message = "Campo Name Preenchimento Obrigatorio")	
 	private String name;
-	@NotNull(message = "Campo LastName Preenchimento Obrigatorio")
+	@NotBlank(message = "Campo LastName Preenchimento Obrigatorio")
 	private String lastName;
 	
-	@NotNull(message = "Campo Endereço Preenchimento Obrigatorio")
+	@NotNull(message = "Campo Endereço Preenchimento Obrigatorio")	
 	private Address address;
 	
 	private Status status;

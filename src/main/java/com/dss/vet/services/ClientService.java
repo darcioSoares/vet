@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.dss.vet.domain.Address;
 import com.dss.vet.domain.Client;
 import com.dss.vet.domain.enums.Status;
-import com.dss.vet.dtos.AddressDto;
 import com.dss.vet.dtos.ClientDto;
 import com.dss.vet.repositories.AddressRepository;
 import com.dss.vet.repositories.ClientRepository;
@@ -27,31 +25,25 @@ public class ClientService {
 	@Autowired
 	private AddressRepository addressRepository;
 	
-	public void teste(ClientDto objDto) {
-		
-		System.out.println("ClientService.teste(ClientDto)");
-		
-		AddressDto address = new AddressDto(objDto.getAddress());
-		
-		
-		this.test( address);
-	}
-	
-	public void test( @Valid AddressDto objDto) {
-		
-		System.out.println(objDto.getRoad());
-	}
+//	public void teste(ClientDto objDto) {
+//		
+//		System.out.println("ClientService.teste(ClientDto)");
+//		
+//		AddressDto address = new AddressDto(objDto.getAddress());
+//		
+//				
+//	}
+
 	
 	public Client create(ClientDto objDto) {
-		
+				
 		this.validationCpf(objDto);		
 		//ao criar o cliente, já entra como ativo
 		objDto.setStatus(Status.ATIVO);
 		
 		Client objClient = new Client(objDto);		
 		Client client = ClientRepository.save(objClient);
-
-				
+				//Address
 		objDto.getAddress().setClient(client);		
 		Address address = addressRepository.save(objDto.getAddress());		
 			

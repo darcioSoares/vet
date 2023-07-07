@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.dss.vet.dtos.AddressDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,12 +21,18 @@ public class Address implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name = "address_id")
+	@Column(name = "id")
 	private Integer id;
+	
+	@NotBlank(message = "Campo Rua Preenchimento Obrigatorio")
 	private String road;
+	@NotBlank(message = "Campo numero Preenchimento Obrigatorio")
 	private String number; 
+	@NotBlank(message = "Campo CEP Preenchimento Obrigatorio")
 	private String zipCode;
+	@NotBlank(message = "Campo Estado Preenchimento Obrigatorio")
 	private String state;
+	@NotBlank(message = "Campo Telefone Preenchimento Obrigatorio")
 	private String contactPhone;
 	
 	@JsonIgnore
@@ -33,33 +40,17 @@ public class Address implements Serializable{
 	@JoinColumn(name = "client_id")
 	private Client client;
 	
-	public Address() {
-		super();
-	}	
-		
+	public Address() {		
+	}			
 	
-	public Address(AddressDto objDto) {
-		super();
+	public Address(AddressDto objDto) {		
 		this.id = objDto.getId();
 		this.road = objDto.getRoad();
 		this.number = objDto.getNumber();
 		this.zipCode = objDto.getZipCode();
 		this.state = objDto.getState();
-		this.contactPhone = objDto.getContactPhone();
-		
+		this.contactPhone = objDto.getContactPhone();		
 	}
-	
-	public Address(Integer id, Address objDto) {
-		super();
-		this.id = objDto.getId();
-		this.road = objDto.getRoad();
-		this.number = objDto.getNumber();
-		this.zipCode = objDto.getZipCode();
-		this.state = objDto.getState();
-		this.contactPhone = objDto.getContactPhone();
-		
-	}
-
 
 
 	public Integer getId() {

@@ -58,6 +58,10 @@ public class ClientController {
 //		clientService.teste(objDto);
 //		System.out.println(objDto.getName());
 //		System.out.println(objDto.getAddress().getNumber());	
+	
+	//metodo
+//	   var parkingSpotModel = new ParkingSpotModel();	
+//	   BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);
 //		
 //	}
 	
